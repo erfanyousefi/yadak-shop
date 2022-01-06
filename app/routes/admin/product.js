@@ -1,0 +1,14 @@
+import {Router} from "express";
+import productController from "../../http/controllers/admin/product/product.controller.js";
+import errorHandler from "../../http/middlewares/apiErrorHandler.js";
+import {insertPriceValidator, insertProductValidator} from "../../http/validators/product.js";
+import {uploadImageValidator} from "../../http/validators/image.js";
+const router = Router();
+router.get("/", productController.productUiDesign);
+router.get("/add", productController.addProductForm);
+router.get("/add-price/:id", productController.addPriceForm);
+router.get("/get-prices/:id", productController.getPrices);
+router.post("/insert", insertProductValidator(), errorHandler ,productController.insertProduct);
+router.post("/insert-price", insertPriceValidator(), errorHandler ,productController.insertPrice);
+router.get("/upload-image/:id" ,productController.uploadImageProduct);
+export default router;

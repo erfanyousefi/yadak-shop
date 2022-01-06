@@ -1,0 +1,502 @@
+.app-content .wizard
+{
+    width: 100%;
+    /* &.wizard-circle{
+		>.steps {
+			>ul{
+				>li{
+					&:before, &:after{
+						top: 43px;
+						width: 50%;
+						height: 5px;
+						background-color: $info;
+					}
+				}
+				>li.current{
+					&:after {
+						background-color: $content-bg;
+					}
+					~ {
+						li {
+							&:before {
+								background-color: $content-bg;
+							}
+							&:after {
+								background-color: $content-bg;
+							}
+						}
+					}
+				}
+			}
+			.step{
+				width: 50px;
+				height: 50px;
+				line-height: 40px;
+				border: 5px solid $content-bg;
+				font-size: 1.3rem;
+				border-radius: 50%;
+			}
+		}
+	} */
+    /* &.wizard-notification{
+		>.steps {
+			>ul{
+				>li{
+					&:before, &:after{
+						top: 39px;
+						width: 50%;
+						height: 2px;
+						background-color: $info;
+					}
+				}
+				>li.current{
+					.step{
+						border:2px solid $info;
+						color:$info;
+						line-height: 36px;
+						&:after{
+							border-top-color: $info;
+						}
+					}
+					&:after {
+						background-color: $content-bg;
+					}
+					~ {
+						li {
+							&:before {
+								background-color: $content-bg;
+							}
+							&:after {
+								background-color: $content-bg;
+							}
+						}
+					}
+				}
+				>li.done {
+					.step{
+						color:#FFF;
+	
+						&:after{
+							border-top-color: $info;
+						}
+					}
+				}
+			}
+			.step{
+				width: 40px;
+				height: 40px;
+				line-height: 40px;
+				font-size: 1.3rem;
+				border-radius: 15%;
+				background-color: $content-bg;
+	
+				&:after{
+					content: "";
+					width: 0;
+					height: 0;
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					margin-left: -8px;
+					margin-bottom: -8px;
+					border-left: 7px solid transparent;
+					border-right: 7px solid transparent;
+					border-top: 8px solid $content-bg;
+				}
+			}
+		}
+	} */
+}
+.app-content .wizard .content
+{
+    margin-right: 0 !important;
+}
+.app-content .wizard > .steps
+{
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+}
+.app-content .wizard > .steps .current-info
+{
+    position: absolute;
+    right: -99999px;
+}
+.app-content .wizard > .steps > ul
+{
+    display: table;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    table-layout: fixed;
+    list-style: none;
+}
+.app-content .wizard > .steps > ul > li
+{
+    position: relative; 
+
+    display: table-cell;
+
+    width: auto;
+
+    text-align: center;
+    vertical-align: top;
+}
+.app-content .wizard > .steps > ul > li a
+{
+    position: relative;
+
+    display: block; 
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 60px;
+}
+.app-content .wizard > .steps > ul > li:before
+{
+    position: absolute;
+    z-index: 9;
+    top: 43px;
+    right: 0;
+
+    display: block;
+
+    width: 50%;
+    height: 5px;
+
+    content: '';
+
+    background-color: #fa626b;
+}
+.app-content .wizard > .steps > ul > li:after
+{
+    position: absolute;
+    z-index: 9;
+    top: 43px;
+    left: 0;
+
+    display: block;
+
+    width: 50%;
+    height: 5px;
+
+    content: '';
+
+    background-color: #fa626b;
+}
+.app-content .wizard > .steps > ul > li:first-child:before
+{
+    content: none;
+}
+.app-content .wizard > .steps > ul > li:last-child:after
+{
+    content: none;
+}
+.app-content .wizard > .steps > ul > li.current > a
+{
+    cursor: default; 
+
+    color: #333;
+}
+.app-content .wizard > .steps > ul > li.current .step
+{
+    color: #fa626b;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px rgba(253, 99, 107, .3);
+            box-shadow: 0 0 20px rgba(253, 99, 107, .3);
+}
+.app-content .wizard > .steps > ul > li.current:after
+{
+    background-color: #f4f5fa;
+}
+.app-content .wizard > .steps > ul > li.current ~ li:before
+{
+    background-color: #f4f5fa;
+}
+.app-content .wizard > .steps > ul > li.current ~ li:after
+{
+    background-color: #f4f5fa;
+}
+.app-content .wizard > .steps > ul > li.disabled a
+{
+    cursor: default; 
+
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.disabled a:hover
+{
+    cursor: default; 
+
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.disabled a:focus
+{
+    cursor: default; 
+
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.done a
+{
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.done a:hover
+{
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.done a:focus
+{
+    color: #999;
+}
+.app-content .wizard > .steps > ul > li.done .step
+{
+    color: #fff; 
+    background-color: #fa626b;
+    -webkit-box-shadow: 0 0 20px rgba(253, 99, 107, .3);
+            box-shadow: 0 0 20px rgba(253, 99, 107, .3);
+}
+.app-content .wizard > .steps > ul > li.error .step
+{
+    color: #fa626b; 
+    border-color: #fa626b;
+}
+.app-content .wizard > .steps .step
+{
+    font-size: 1.5rem;
+    line-height: 50px;
+
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 50%;
+
+    display: inline-block;
+
+    width: 50px;
+    height: 50px;
+    margin-right: -24px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    border-radius: 12%;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+}
+.app-content .wizard > .content
+{
+    position: relative;
+
+    width: auto;
+    margin: 0; 
+    padding: 0;
+}
+.app-content .wizard > .content > .title
+{
+    position: absolute;
+    right: -99999px;
+}
+.app-content .wizard > .content > .body
+{
+    padding: 0 20px;
+}
+.app-content .wizard > .content > iframe
+{
+    width: 100%;
+    height: 100%; 
+
+    border: 0 none;
+}
+.app-content .wizard > .actions
+{
+    position: relative;
+
+    display: block;
+
+    padding: 20px;
+    padding-top: 0; 
+
+    text-align: left;
+}
+.app-content .wizard > .actions > ul
+{
+    float: left;
+
+    margin: 0; 
+    padding: 0;
+
+    list-style: none;
+}
+.app-content .wizard > .actions > ul:after
+{
+    display: table;
+    clear: both; 
+
+    content: '';
+}
+.app-content .wizard > .actions > ul > li
+{
+    float: right;
+}
+.app-content .wizard > .actions > ul > li + li
+{
+    margin-right: 10px;
+}
+.app-content .wizard > .actions > ul > li > a
+{
+    display: block;
+
+    padding: 7px 12px;
+
+    color: #fff;
+    border: 1px solid transparent; 
+    border-radius: 2px;
+    background: #6967ce;
+}
+.app-content .wizard > .actions > ul > li > a:hover
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset;
+}
+.app-content .wizard > .actions > ul > li > a:focus
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset;
+}
+.app-content .wizard > .actions > ul > li > a:active
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .1) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .1) inset;
+}
+.app-content .wizard > .actions > ul > li > a[href='#previous']
+{
+    color: white; 
+    background-color: #fa626b;
+}
+.app-content .wizard > .actions > ul > li > a[href='#previous']:hover
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset;
+}
+.app-content .wizard > .actions > ul > li > a[href='#previous']:focus
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset;
+}
+.app-content .wizard > .actions > ul > li > a[href='#previous']:active
+{
+    -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .04) inset;
+            box-shadow: 0 0 0 100px rgba(0, 0, 0, .04) inset;
+}
+.app-content .wizard > .actions > ul > li.disabled > a
+{
+    color: white;
+}
+.app-content .wizard > .actions > ul > li.disabled > a:hover
+{
+    color: white;
+}
+.app-content .wizard > .actions > ul > li.disabled > a:focus
+{
+    color: white;
+}
+.app-content .wizard > .actions > ul > li.disabled > a[href='#previous']
+{
+    background-color: #6b6f80;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+.app-content .wizard > .actions > ul > li.disabled > a[href='#previous']:hover
+{
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+.app-content .wizard > .actions > ul > li.disabled > a[href='#previous']:focus
+{
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+.app-content .wizard.vertical > .steps
+{
+    display: inline;
+    float: right;
+
+    width: 10%;
+}
+.app-content .wizard.vertical > .steps > ul > li
+{
+    display: block;
+
+    width: 100%;
+}
+.app-content .wizard.vertical > .steps > ul > li:before,
+.app-content .wizard.vertical > .steps > ul > li:after
+{
+    background-color: transparent;
+}
+.app-content .wizard.vertical > .steps > ul > li.current:before,
+.app-content .wizard.vertical > .steps > ul > li.current:after
+{
+    background-color: transparent;
+}
+.app-content .wizard.vertical > .steps > ul > li.current ~ li:before
+{
+    background-color: transparent;
+}
+.app-content .wizard.vertical > .steps > ul > li.current ~ li:after
+{
+    background-color: transparent;
+}
+
+@media (max-width: 768px)
+{
+    .app-content .wizard > .steps > ul
+    {
+        margin-bottom: 20px;
+    }
+    .app-content .wizard > .steps > ul > li
+    {
+        display: block;
+        float: right;
+
+        width: 50%;
+    }
+    .app-content .wizard > .steps > ul > li > a
+    {
+        margin-bottom: 0;
+    }
+    .app-content .wizard > .steps > ul > li:first-child:before
+    {
+        content: '';
+    }
+    .app-content .wizard > .steps > ul > li:last-child:after
+    {
+        content: '';
+
+        background-color: #28afd0;
+    }
+    .app-content .wizard.vertical > .steps
+    {
+        width: 15%;
+    }
+}
+
+@media (max-width: 480px)
+{
+    .app-content .wizard > .steps > ul > li
+    {
+        width: 100%;
+    }
+    .app-content .wizard > .steps > ul > li.current:after
+    {
+        background-color: #28afd0;
+    }
+    .app-content .wizard.vertical > .steps
+    {
+        width: 20%;
+    }
+}
