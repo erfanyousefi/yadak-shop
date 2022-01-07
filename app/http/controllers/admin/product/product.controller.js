@@ -6,6 +6,7 @@ import CompanyModel from "../../../../models/company.js";
 import ProductModel from "../../../../models/product.js";
 import { ObjectId } from "mongodb";
 import { db } from "./../../../../modules/connectToDB.js";
+import express from "express";
 export default new class ProductController extends Controller{
     async productUiDesign(req, res, next){
         try{
@@ -190,9 +191,24 @@ export default new class ProductController extends Controller{
             next(error)
         }
     }
+    async uploadImageProductForm(req, res, next){
+        try{
+            const {id} = req.params
+            return res.status(200).render("./pages/admin/product/upload-img", {
+                product_id : id
+            })
+        }catch(error){
+            next(error)
+        }
+    }
     async uploadImageProduct(req, res, next){
         try{
-            return res.status(200).render("./pages/admin/product/upload-img")
+            const image = this.getFileName(req.file);
+            const {id} = req.params;
+            await ProductModel.updateOne({_id : id} , {$set : {image}}).catch(error => {
+                this.removeFile(req.file)
+            })
+            return res.status(201).redirect("/admin/product")
         }catch(error){
             next(error)
         }

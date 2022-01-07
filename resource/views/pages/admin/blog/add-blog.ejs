@@ -1,0 +1,151 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-header row">
+            <div class="content-header-left col-md-4 col-12 mb-2">
+                <h3 class="content-header-title">بخش مقالات</h3>
+            </div>
+            <div class="content-header-right col-md-8 col-12">
+                <div class="breadcrumbs-top float-md-right">
+                    <div class="breadcrumb-wrapper mr-1">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/admin">خانه</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="/admin/blog">لیست مقالات</a>
+                            </li>
+                            <li class="breadcrumb-item active"><a href="/admin/blog/add">افزودن مقاله</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Basic form layout section start -->
+            <section id="basic-form-layouts">
+                <div class="row match-height">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title" id="basic-layout-form">افزودن مقاله</h4>
+                                <a class="heading-elements-toggle">
+                                    <i class="la la-ellipsis-v font-medium-3"></i>
+                                </a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li>
+                                            <a data-action="collapse">
+                                                <i class="ft-minus"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-action="reload">
+                                                <i class="ft-rotate-cw"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-action="expand">
+                                                <i class="ft-maximize"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-action="close">
+                                                <i class="ft-x"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <p>تمامی فیلد هارا به درستی و با دقت پر کنید</p>
+                                    </div>
+
+                                    <form class="form" method="post" action="/admin/blog/insert"
+                                        enctype="multipart/form-data">
+                                        <div class="form-body">
+                                            <h4 class="form-section">
+                                                <i class="ft-flag"></i> اطلاعات مقاله</h4>
+                                            <div class="form-group">
+                                                <label for="companyName">عنوان مقاله</label>
+                                                <input type="text" id="companyName" class="form-control"
+                                                    placeholder="عنوان مقاله" name="title">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="companyinput1">تصاویر مقاله</label>
+                                                        <input type="file" multiple id="companyinput1"
+                                                            class="form-control images" name="images">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="companyinput5">فایل پی دی اف</label>
+                                                        <input type="file" id="companyinput1" class="form-control pdf"
+                                                            name="pdf">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companyinput1">پیشنهادات</label>
+                                                <input type="text" id="companyinput1" class="form-control"
+                                                    placeholder="پیشنهاد" name="suggest">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companyinput8">توضیحات مقاله</label>
+                                                <textarea id="companyinput8" rows="5" class="form-control" name="text"
+                                                    placeholder="توضیحات مقاله"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <a href="/admin/blog" class="btn btn-danger mr-1">
+                                                <i class="ft-x"></i> برگشت
+                                            </a>
+                                            <button type="submit" id="insertProductBtn" class="btn btn-primary">
+                                                <i class="la la-check-square-o"></i> ذخیره
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="modal fade text-left" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="basicModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="basicModalLabel2"><i class="la la-road2"></i>سیستم هشدار</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%if(Object.keys(messages).length){%>
+    <script>
+        document.querySelector(".modal-body").innerHTML = "<%-Object.keys(messages)?.map(key =>(`<span>${messages[key]}</span><br/>`)).join('')%>"
+        $('#iconModal').modal("show")
+    </script>  
+<%}%>
+<%if(message){%>
+    <script>
+        document.querySelector(".modal-body").innerHTML = "<%-`<span>${message}</span><br/>`%>";
+        $('#iconModal').modal("show");  
+    </script>  
+<%}%>

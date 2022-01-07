@@ -3,6 +3,7 @@ import productController from "../../http/controllers/admin/product/product.cont
 import errorHandler from "../../http/middlewares/apiErrorHandler.js";
 import {insertPriceValidator, insertProductValidator} from "../../http/validators/product.js";
 import {uploadImageValidator} from "../../http/validators/image.js";
+import { upload } from "../../modules/upload-file.js";
 const router = Router();
 router.get("/", productController.productUiDesign);
 router.get("/add", productController.addProductForm);
@@ -10,5 +11,6 @@ router.get("/add-price/:id", productController.addPriceForm);
 router.get("/get-prices/:id", productController.getPrices);
 router.post("/insert", insertProductValidator(), errorHandler ,productController.insertProduct);
 router.post("/insert-price", insertPriceValidator(), errorHandler ,productController.insertPrice);
-router.get("/upload-image/:id" ,productController.uploadImageProduct);
+router.get("/upload-image/:id" ,productController.uploadImageProductForm);
+router.post("/upload-image/:id",upload.single("image"), uploadImageValidator() ,productController.uploadImageProduct);
 export default router;

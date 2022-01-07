@@ -8,7 +8,7 @@ export default (req, res, next) => {
             messages[error["param"]] = error["msg"];
         });
         
-        return res.status(400).redirect(req.headers.referer)
+        req.body.errors = messages
     }
     next();
 }

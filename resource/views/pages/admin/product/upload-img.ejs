@@ -62,8 +62,8 @@
                                         <p>تمامی فیلد هارا به درستی و با دقت پر کنید</p>
                                     </div>
                                     
-                                    <form class="form" method="post" action="/admin/product/insert-price"
-                                        enctype="application/x-www-form-urlencoded">
+                                    <form class="form" method="post" action="/admin/product/upload-image/<%=product_id%>"
+                                        enctype="multipart/form-data">
                                         <div class="form-body">
                                             <h4 class="form-section">
                                                 <i class="ft-flag"></i>  ثبت تصویر محصول</h4>
@@ -110,40 +110,3 @@
         </div>
     </div>
 </div>
-<script>
-    const insertCompanyBtn = document.querySelector("#insertCompanyBtn");
-    insertCompanyBtn.addEventListener("click", async (e) => {
-        const url = window.location.href;
-        e.preventDefault();
-        $(".form").serialize()
-        const formData = $(".form").serializeArray()
-        formData.push({name : "product_id", value : (url.split("/"))[(url.split("/")).length -1]})
-        const myForm = new FormData();
-        const body = {}
-        formData.map(field => {
-            body[field.name] = field.value
-        })
-        console.log(body)
-        const result = await (await fetch("http://localhost:5000/admin/product/insert-price", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        })).json()
-        if ([400, 404, 401, 500, 503, 501].includes(result.status)) {
-            if(result.messages){
-                document.querySelector(".modal-body").innerHTML = Object.keys(result.messages)?.map(key => (`<span>${result.messages[key]}</span><br/>`)).join("")
-            }else{
-                document.querySelector(".modal-body").innerHTML = `<span>${result.message}</span><br/>`
-            }
-            $('#iconModal').modal("show");
-        }else{
-            document.querySelector(".modal-body").innerHTML = `<span>${result.message}</span><br/>`
-            $('#iconModal').modal("show");
-            const inputs = (document.querySelectorAll("input")).forEach(input => {
-                input.value = ""
-            });
-        }
-    });
-</script>

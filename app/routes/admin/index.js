@@ -5,8 +5,10 @@ import {
 const router = Router();
 import productRoutes from "./product.js"
 import companyRoutes from "./company.js"
+import blogRoutes from "./blog.js"
 router.use("/product", productRoutes)
 router.use("/company", companyRoutes)
+router.use("/blog", blogRoutes)
 router.get("/", async (req, res, next) => {
     res.status(200).render("./pages/admin/dashboard")
 })
