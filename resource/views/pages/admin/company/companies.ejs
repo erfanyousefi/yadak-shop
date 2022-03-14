@@ -55,6 +55,8 @@
                                                     <th></th>
                                                     <th>نام فارسی</th>
                                                     <th>نام لاتین</th>
+                                                    <th>تولید کننده محصولات : </th>
+                                                    <th>لوگوی کمپانی</th>
                                                     <th>عملیات</th>
 
                                                 </tr>
@@ -69,12 +71,20 @@
                                                         <div class="media">
                                                             <div class="media-body media-middle">
                                                                 <span
-                                                                    class="media-heading text-bold-700"><%=company.en_name%></span>
+                                                                    class="media-heading text-bold-700"><%=company.fa_name%></span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="text-left">
                                                         <span><%=(company.en_name)%></span>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <span><%=(company.type=="oil"? "روغن" : company.type=="filter"? "فیلتر" : "یدکی")%></span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <%if(company.logo){%>
+                                                        <img src="<%=company.logo%>" width="70" height="70"/>
+                                                        <%}else{%>فاقد لوگو<%}%>
                                                     </td>
                                                     <td>
                                                         <span class="dropdown">
@@ -90,6 +100,8 @@
                                                                     <i class="ft-trash-2"></i> ویرایش</a>
                                                                 <a href="#" class="dropdown-item">
                                                                     <i class="ft-edit-2"></i> حذف</a>
+                                                                    <a href="/admin/company/upload-logo/<%=company._id%>" class="dropdown-item">
+                                                                        <i class="ft-trash-2"></i> افزودن لوگوی شرکت</a>
                                                             </span>
                                                         </span>
                                                     </td>

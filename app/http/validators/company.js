@@ -14,3 +14,5 @@ export function insertCompanyValidator () {
 // body("").notEmpty().withMessage(""),
 // body("").notEmpty().withMessage(""),
 // body("").notEmpty().withMessage(""),
+
+

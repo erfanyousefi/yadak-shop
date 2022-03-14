@@ -1,4 +1,5 @@
-import {Schema, model, Types} from "mongoose";
+import mongoose from "mongoose";
+const {Schema, model, Types} = mongoose;
 const UserSchema = new Schema({
     name : {type : String, default : ""},
     username : {type : String, required : true},
@@ -9,8 +10,7 @@ const UserSchema = new Schema({
     addresses : {type : [Object], default : []},
     profile_img : {type : String, default : "default.png"},
     role : {type : String, default : "user"},
-    basket : {type : [Object], default : []},
-    
+    basket : {type : [{product : String, count : Number, company : String}], default : []},
 }, {
     timestamps : true,
     versionKey : false

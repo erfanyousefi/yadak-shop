@@ -1,6 +1,7 @@
 import CompanyModel from "../../../../models/company.js";
 import Controller from "../../controller.js";
 import ComapnyService from "./company.service.js"
+let message, messages = {}
 export default new class CompanyController extends Controller{
     async comanyList(req, res, next){
         try {
@@ -29,6 +30,30 @@ export default new class CompanyController extends Controller{
                 message : "افزودن شرکت تولید کننده با موفقیت انجام شد"
             })
         } catch (error) {
+            next(error)
+        }
+    }
+    async uploadLogoCompanyForm(req, res, next){
+        try{
+            const {id} = req.params
+            return res.status(200).render("./pages/admin/company/upload-logo", {
+                company_id : id,
+                message,
+                messages
+            })
+        }catch(error){
+            next(error)
+        }
+    }
+    async uploadLogoCompany(req, res, next){
+        try{
+            const image = this.getFileName(req.file);
+            const {id} = req.params;
+            await CompanyModel.updateOne({_id : id} , {$set : {logo : image}}).catch(error => {
+                this.removeFile(req.file)
+            })
+            return res.status(201).redirect("/admin/company")
+        }catch(error){
             next(error)
         }
     }

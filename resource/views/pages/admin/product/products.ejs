@@ -15,9 +15,24 @@
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
                                             <li>
-                                                <a href="/admin/product/add">
-                                                    <i class="ft-plus-circle"></i>
-                                                </a>
+                                                <span class="dropdown">
+                                                    <button id="btnSearchDrop12" type="button"
+                                                        class="btn btn-sm btn-icon btn-pure font-medium-2"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="ft-plus-circle"></i>
+                                                    </button>
+                                                    <span aria-labelledby="btnSearchDrop12"
+                                                        class="dropdown-menu mt-1 dropdown-menu-right">
+                                                        <a href="/admin/product/add" class="dropdown-item">
+                                                            <i class="ft-plus-circle"></i> افزودن محصول یدکی</a>
+                                                        <a href="/admin/product/add?category=oil" class="dropdown-item">
+                                                            <i class="ft-plus-circle"></i> افزودن محصول مصرفی (روغن)</a>
+                                                        <a href="/admin/product/add?category=filter"
+                                                            class="dropdown-item">
+                                                            <i class="ft-plus-circle"></i> افزودن محصول (فیلتر)</a>
+                                                    </span>
+                                                </span>
                                             </li>
                                             <li>
                                                 <a data-action="collapse">
@@ -95,10 +110,10 @@
                                                             </button>
                                                             <span aria-labelledby="btnSearchDrop12"
                                                                 class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                <a href="/admin/product/edit-form/<%=product._id%>?category=<%=product.category%>" class="dropdown-item">
+                                                                    <i class="ft-edit-2"></i> ویرایش</a>
                                                                 <a href="#" class="dropdown-item">
-                                                                    <i class="ft-trash-2"></i> ویرایش</a>
-                                                                <a href="#" class="dropdown-item">
-                                                                    <i class="ft-edit-2"></i> حذف</a>
+                                                                    <i class="ft-trash-2"></i> حذف</a>
                                                                 <a href="/admin/product/add-price/<%=product._id%>"
                                                                     class="dropdown-item">
                                                                     <i class="ft-plus-circle"></i> افزودن قیمت</a>

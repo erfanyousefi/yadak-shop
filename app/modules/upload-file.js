@@ -10,7 +10,7 @@ const createFolderWithDate = (folder) => {
 }
 const storage = multer.diskStorage({
     destination : (req, file, callback) => {
-        const folder = req.originalUrl.indexOf("product") > 0? "product" : req.originalUrl.indexOf("blog") > 0? "blog" : "other"
+        const folder = req.originalUrl.indexOf("product") > 0? "product" : req.originalUrl.indexOf("blog") > 0? "blog" : req.originalUrl.indexOf("company") > 0? "logo" : "other"
     const path = createFolderWithDate(folder)
     if(!fs.existsSync(path)){
             fs.mkdirSync(path, {recursive : true})

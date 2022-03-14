@@ -64,6 +64,8 @@
                                     
                                     <form class="form" method="post" action="/admin/product/insert"
                                         enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="category" value="stock">
+
                                         <div class="form-body">
                                             <h4 class="form-section">
                                                 <i class="ft-flag"></i> اطلاعات محصول</h4>
@@ -82,27 +84,6 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="companyinput5">برند محصول</label>
-                                                        <select id="companyinput5" name="brand" class="form-control">
-                                                            <option value="" >یک برند را انتخاب کنید</option>
-                                                            <option value="تویوتا" >تیوتا</option>
-                                                            <option value="ابران خودرو">ایران خودرو</option>
-                                                            <option value="سایپا">سایپا</option>
-                                                            <option value="ایران یدک">ایران یدک</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="companyinput1">قیمت محصول به ریال</label>
-                                                        <input type="number" id="companyinput1" class="form-control"
-                                                            placeholder="مبلغ " name="price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
                                                         <label for="companyinput1">تخفیف محصول به درصد</label>
                                                         <input type="text" name="off"
                                                             class="form-control percentage-inputmask"
@@ -110,6 +91,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -120,80 +102,39 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="companyinput5">کشور سازنده</label>
-                                                        <select id="companyinput5" name="madeIn" class="form-control">
-                                                            <option value="">یک کشور را انتخاب کنید</option>
-                                                            <option value="japan" disabled="">ژاپن</option>
-                                                            <option value="iran">ایران</option>
-                                                            <option value="chain">چین</option>
-                                                            <option value="france">فرانسه </option>
-                                                            <option value="germany">آلمان</option>
-                                                            <option value="turky">ترکیه</option>
-                                                            <option value="sweden">سوئد</option>
-                                                            <option value="english">انگلیس</option>
-                                                            <option value="america">آمریکا</option>
-                                                        </select>
+                                                        <label for="companyinput1">سری ساخت</label>
+                                                        <input type="text" name="series" class="form-control "
+                                                            id="companyinput1" placeholder="سری ساخت">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="companyinput1">طول</label>
+                                                        <label for="companyinput1">طول (سانتی متر)</label>
                                                         <input type="number" id="companyinput1" class="form-control"
                                                             placeholder="طول " name="length">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="companyinput1">وزن</label>
+                                                        <label for="companyinput1">وزن (گرم)</label>
                                                         <input type="number" name="weight" class="form-control"
                                                             id="companyinput1" placeholder="وزن">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="companyinput1">ارتفاع</label>
+                                                        <label for="companyinput1">ارتفاع (سانتی متر)</label>
                                                         <input type="number" id="companyinput1" class="form-control"
                                                             placeholder="ارتفاع " name="height">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="companyinput1">عرض</label>
+                                                        <label for="companyinput1">عرض (سانتی متر)</label>
                                                         <input type="number" name="width" class="form-control"
                                                             id="companyinput1" placeholder="عرض">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="companyinput1">انتخاب رنگ ها</label>
-                                                        <select name="colors" 
-                                                            class="select2-placeholder-multiple select2-placeholder-colors form-control"
-                                                            multiple="multiple" id="id_h5_multi">
-                                                            <option value="">حداقل یک رنگ را انتخاب کنید</option>
-                                                            <option value="قرمز">قرمز</option>
-                                                            <option value="آبی">آبی</option>
-                                                            <option value="مشکی">مشکی</option>
-                                                            <option value="نقره ای">نقره ای</option>
-                                                            <option value="خاکستری">خاکستری</option>
-                                                            <option value="زرد">زرد</option>
-                                                            <option value="سبز">سبز</option>
-                                                            <option value="بنفش">بنفش</option>
-                                                            <option value="نارنجی">نارنجی</option>
-                                                            <option value="قهوه ای"قهوه ای></option>
-                                                            <option value="سفید">سفید</option>
-                                                            <option value="فیروزه ای">فیروزه ای</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="companyinput1">سری ساخت</label>
-                                                        <input type="text" name="percent" class="form-control "
-                                                            id="companyinput1" placeholder="سری ساخت">
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,7 +209,8 @@
                 input.value = ""
             });
             (document.querySelectorAll("textarea")).forEach(input => {
-                input.innerHTML = ""
+                input.innerHTML = "";
+                input.value = "";
             });
         }
     });

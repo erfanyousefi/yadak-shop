@@ -13,7 +13,7 @@
                             </li>
                             <li class="breadcrumb-item"><a href="/admin/company">لیست شرکت ها</a>
                             </li>
-                            <li class="breadcrumb-item active"><a href="/admin/company/add">افزودن شرکت</a>
+                            <li class="breadcrumb-item active"><a href="/admin/company/add-logo">افزودن شرکت</a>
                             </li>
                         </ol>
                     </div>
@@ -62,34 +62,16 @@
                                         <p>تمامی فیلد هارا به درستی و با دقت پر کنید</p>
                                     </div>
                                     
-                                    <form class="form" method="post" action="/admin/company/insert"
-                                        enctype="application/x-www-form-urlencoded">
+                                    <form class="form" method="post" action="/admin/company/upload-logo/<%=company_id%>"
+                                        enctype="multipart/form-data">
                                         <div class="form-body">
                                             <h4 class="form-section">
                                                 <i class="ft-flag"></i> ثبت شرکت تولید کننده قطعات</h4>
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="companyinput1">نام فارسی شرکت</label>
-                                                        <input type="text" id="companyinput1" class="form-control"
-                                                            placeholder="نام فارسی شرکت" name="fa_name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="companyinput1">نام لاتین شرکت</label>
-                                                        <input type="text" id="companyinput1" class="form-control"
-                                                            placeholder="نام لاتین شرکت" name="en_name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="companyinput1">نوع محصول</label>
-                                                        <select name="type" class="form-control">
-                                                            <option value="stock">یدکی</option>
-                                                            <option value="oil">روغن</option>
-                                                            <option value="filter">فیلتر</option>
-                                                        </select>
+                                                        <label for="companyinput1">انتخاب لوگوی کمپانی</label>
+                                                        <input type="file" id="file" class="form-control" name="image">
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,38 +112,16 @@
         </div>
     </div>
 </div>
-<script>
-    const insertCompanyBtn = document.querySelector("#insertCompanyBtn");
-    insertCompanyBtn.addEventListener("click", async (e) => {
-        e.preventDefault();
-        $(".form").serialize()
-        const formData = $(".form").serializeArray()
-        const myForm = new FormData();
-        const body = {}
-        formData.map(field => {
-            body[field.name] = field.value
-        })
-        console.log(body)
-        const result = await (await fetch("http://localhost:5000/admin/company/insert", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        })).json()
-        if ([400, 404, 401, 500, 503, 501].includes(result.status)) {
-            if(result.messages){
-                document.querySelector(".modal-body").innerHTML = Object.keys(result.messages)?.map(key => (`<span>${result.messages[key]}</span><br/>`)).join("")
-            }else{
-                document.querySelector(".modal-body").innerHTML = `<span>${result.message}</span><br/>`
-            }
-            $('#iconModal').modal("show");
-        }else{
-            document.querySelector(".modal-body").innerHTML = `<span>${result.message}</span><br/>`
-            $('#iconModal').modal("show");
-            const inputs = (document.querySelectorAll("input")).forEach(input => {
-                input.value = ""
-            });
-        }
-    });
-</script>
+
+<%if(Object.keys(messages).length){%>
+    <script>
+        document.querySelector(".modal-body").innerHTML = "<%-Object.keys(messages)?.map(key =>(`<span>${messages[key]}</span><br/>`)).join('')%>"
+        $('#iconModal').modal("show")
+    </script>  
+<%}%>
+<%if(message){%>
+    <script>
+        document.querySelector(".modal-body").innerHTML = "<%-`<span>${message}</span><br/>`%>";
+        $('#iconModal').modal("show");  
+    </script>  
+<%}%>

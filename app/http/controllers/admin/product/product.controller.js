@@ -21,15 +21,36 @@ export default new class ProductController extends Controller{
     }
     async addProductForm(req, res, next){
         try{
-            return res.status(200).render("./pages/admin/product/add-product")
+            const {category} = req.query;
+            switch (category) {
+                case "stock":
+                    return res.status(200).render("./pages/admin/product/add-product")
+                case "oil":
+                    return res.status(200).render("./pages/admin/product/add-oil-product")
+                case "filter":
+                    return res.status(200).render("./pages/admin/product/add-filter-product")
+                default:
+                    return res.status(200).render("./pages/admin/product/add-product")
+            }
+            
+        }catch(error){
+            next(error)
+        }
+    }
+    async addOilProductForm(req, res, next){
+        try{
+            return res.status(200).render("./pages/admin/product/add-oil-product")
         }catch(error){
             next(error)
         }
     }
     async addPriceForm(req, res, next){
         try {
-            const companies = await companyService.findCompanies()
             const {id} = req.params
+            const product = await ProductModel.findOne({_id : id})
+            if(!product) return res.redirect("/admin/product")
+            console.log(product.category)
+            const companies = await companyService.findCompanies({type : product.category})
             console.log(id);
             return res.status(200).render("pages/admin/product/add-price", {
                 companies,
@@ -45,41 +66,38 @@ export default new class ProductController extends Controller{
             const sizes = {
                 length : req.body.length || "0",
                 width : req.body?.width || "0",
-                height : req.body?.heigth || "0"
+                height : req.body?.height || "0"
             }
             const {
                 title,
                 text,
                 count,
-                serialNumber,
-                price,
+                serialnumber,
                 off,
-                supplier,
-                brand,
-                logo,
                 weight,
-                grade,
-                madeIn,
-                madeDate,
+                volume,
+                type,
+                cars,
                 series,
-                colors
+                category,
             } = req.body;
+            const slug = title.replace(/[\s\@\$\#\!\^\&\*\(\)\=\+\/]/gim, "-");
             console.log(req.body)
             await ProductService.insertProduct({
                 title,
+                slug,
                 text,
                 count,
-                serialNumber,
-                price,
+                serialNumber : serialnumber,
                 off,
-                supplier,
-                brand,
                 weight,
-                grade,
-                madeIn,
                 series,
                 sizes,
-                colors
+                volume, //for oil's
+                type, //for oil's
+                cars, //for oil's
+                category, // for find category
+
             });
             return res.status(201).json({
                 status : 201,
@@ -92,26 +110,40 @@ export default new class ProductController extends Controller{
     }
     async updateProduct(req, res, next){
         try {
+            const {id} = req.params;
+            const product = await ProductModel.findById(id)
+            const category = req.body.category;
             const data =  {
                 title : req.body.title,
                 text : req.body.text,
                 count : req.body.count,
-                serialNumber : req.body.serialNumber,
-                price : req.body.price,
+                serialNumber : req.body.serialnumber,
                 off : req.body.off,
-                supplier : req.body.supplier,
-                brand : req.body.brand,
-                logo : req.body.logo,
                 weight : req.body.weight,
-                grade : req.body.grade,
-                madeIn : req.body.madeIn,
-                madeDate : req.body.madeDate,
                 series : req.body.series,
-                sizes : req.body.sizes,
-                colors : req.body.colors
             };
-            Object.keys(data).forEach(key => (!data[key])? delete data[key] : data[key]);
-            await ProductService.updateProduct(data);
+            if(data.title) data.slug = data.title.replace(/[\s\@\$\#\!\^\&\*\(\)\=\+\/]/gim, "-");
+            switch (category) {
+                case "oil":
+                    data.volume = req.body.volume;
+                    data.cars = req.body.cars;
+                    break;
+                case "filter":
+                    data.cars = req.body.cars;
+                    break;
+                case "stock" :
+                    const sizes = {
+                        length : req.body.length || product.sizes.length,
+                        width : req.body?.width || product.sizes.width,
+                        height : req.body?.height || product.sizes.height
+                    }
+                    data.sizes = sizes
+                    break;
+                default:
+                    break;
+            }
+            Object.keys(data).forEach(key => ([null, undefined, "", " ", "0"].includes(data[key])? delete data[key] : data[key]));
+            await ProductService.updateProduct(id, data);
             return res.status(201).json({
                 status : 201,
                 success : true,
@@ -252,6 +284,17 @@ export default new class ProductController extends Controller{
                 status : 200,
                 success : true,
                 ...product[0]
+            })
+        }catch(error){
+            next(error)
+        }
+    }
+    async updateProductForm(req, res, next){
+        try{
+            const {id} = req.params;
+            const product = await ProductModel.findById(id);
+            return res.status(200).render("./pages/admin/product/edit-product", {
+                product
             })
         }catch(error){
             next(error)

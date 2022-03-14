@@ -9,7 +9,7 @@ export default new class ProductService extends Controller{
     }
     async updateProduct(id, payload){
         await this.findOneProduct(id);
-        await ProductModel.updateOne({_id : id}, {$set : {...payload}})
+        await ProductModel.updateOne({_id : id}, {$set : {...payload, sizes : {...payload.sizes}}})
     }
     async removeProduct(id){
         await this.findOneProduct(id)

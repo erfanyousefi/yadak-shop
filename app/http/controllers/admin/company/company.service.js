@@ -1,8 +1,8 @@
 import Controller from "../../controller.js";
 import CompanyModel from "../../../../models/company.js";
 export default new class CompanyService extends Controller{
-    async findCompanies(){
-        return (await CompanyModel.find({}))
+    async findCompanies(filter = {}){
+        return (await CompanyModel.find(filter))
     }
     async findCompany(id){
         const company = await CompanyModel.findById(id);
