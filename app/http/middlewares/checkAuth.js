@@ -1,7 +1,7 @@
-import jsonwebtoken from "jsonwebtoken";
-import UserModel from "../../models/user.js";
+const jsonwebtoken = require("jsonwebtoken")
+const UserModel = require("../../models/user")
 
-export const loginWithToken = async (req,res, next) => {
+const loginWithToken = async (req,res, next) => {
     try {
         if(req?.headers?.authorization){
             const token = req?.headers?.authorization.split(" ").pop();
@@ -20,4 +20,7 @@ export const loginWithToken = async (req,res, next) => {
     } catch (error) {
         next(error)
     }
+}
+module.exports = {
+    loginWithToken
 }

@@ -1,6 +1,6 @@
-import {Router} from "express";
-import homeController from "../../http/controllers/api/home.controller.js";
+const {Router}  = require("express");
+const homeController = require("../../http/controllers/api/home.controller");
 const router = Router();
 router.post("/add-to-basket", homeController.addToCard)
 router.post("/remove-from-basket", homeController.removeFromCard)
-export default router;
+module.exports = router;

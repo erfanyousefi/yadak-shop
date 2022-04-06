@@ -1,13 +1,13 @@
-import Controller from "../../controller.js";
-import ProductService from "./product.service.js"
-import mongoose from "mongoose";
-import companyService from "../company/company.service.js";
-import CompanyModel from "../../../../models/company.js";
-import ProductModel from "../../../../models/product.js";
-import { ObjectId } from "mongodb";
-import { db } from "./../../../../modules/connectToDB.js";
-import express from "express";
-export default new class ProductController extends Controller{
+const Controller = require("../../controller")
+const ProductService = require("./product.service")
+const mongoose = require("mongoose")
+const companyService = require("../company/company.service")
+const CompanyModel = require("../../../../models/company")
+const ProductModel = require("../../../../models/product")
+const { ObjectId } = require("mongodb")
+const { db } = require("./../../../../modules/connectToDB")
+const express = require("express")
+module.exports = new class ProductController extends Controller{
     async productUiDesign(req, res, next){
         try{
             const filters = {};
@@ -257,7 +257,7 @@ export default new class ProductController extends Controller{
             })
             aggregate.push({
                 $lookup : {
-                    from : "companies",
+                    from: "companies",
                     localField : "prices.company",
                     foreignField : "_id",
                     as : "list"

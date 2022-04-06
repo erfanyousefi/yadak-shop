@@ -1,8 +1,8 @@
-import CompanyModel from "../../../../models/company.js";
-import Controller from "../../controller.js";
-import ComapnyService from "./company.service.js"
+const CompanyModel = require("../../../../models/company")
+const Controller = require("../../controller")
+const ComapnyService = require("./company.service")
 let message, messages = {}
-export default new class CompanyController extends Controller{
+module.exports = new class CompanyController extends Controller{
     async comanyList(req, res, next){
         try {
             const companies = await ComapnyService.findCompanies();

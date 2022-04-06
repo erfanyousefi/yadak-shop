@@ -1,7 +1,7 @@
-import { body } from "express-validator"
-import UserModel from "../../models/user.js"
+const { body } = require("express-validator")
+const UserModel = require("../../models/user")
 
-export const register = () => {
+module.exports.register = () => {
     return [
         body("name").notEmpty().withMessage("نام و نام خانوادگی نمیتواند خالی باشد"),
         body("password").isLength({min : 8, max : 16}).withMessage("رمز عبور بابد حداقل 8 و حداکثر 16 نویسه باشد"),

@@ -1,9 +1,9 @@
-import blogController from "../../http/controllers/admin/blog/blog.controller.js";
-import { Router } from "express";
-import { upload } from "../../modules/upload-file.js";
-import { insertBlog } from "../../http/validators/blog.js";
-import apiErrorHandler from "../../http/middlewares/apiErrorHandler.js";
-import ejsErrorHandler from "../../http/middlewares/ejsErrorHandler.js";
+const blogController = require("../../http/controllers/admin/blog/blog.controller");
+const { Router } = require("express");
+const { upload } = require("../../modules/upload-file");
+const { insertBlog } = require("../../http/validators/blog");
+const apiErrorHandler = require("../../http/middlewares/apiErrorHandler");
+const ejsErrorHandler = require("../../http/middlewares/ejsErrorHandler");
 const router = Router();
 router.get("/", blogController.blogs);
 router.get("/add", blogController.insertBlogForm);
@@ -16,4 +16,4 @@ router.post("/update/:id", upload.fields([
     {name : "pdf", maxCount : 1},
     {name : "images", maxCount : 3},
 ]),insertBlog(), blogController.updateBlog)
-export default router;
+module.exports = router;

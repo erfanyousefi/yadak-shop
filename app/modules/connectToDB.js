@@ -1,10 +1,10 @@
-import { MongoClient } from "mongodb";
+const { MongoClient } = require("mongodb");
 
 let db;
 (async() => {
     const client = await MongoClient.connect("mongodb://localhost:27017");
     db = client.db("yadaki")
 })()
-export {
+module.exports = {
     db
 }

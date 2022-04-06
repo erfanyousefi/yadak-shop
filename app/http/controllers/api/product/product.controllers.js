@@ -1,8 +1,8 @@
-import { ObjectId } from "mongodb";
-import CompanyModel from "../../../../models/company.js";
-import ProductModel from "../../../../models/product.js";
-import Controller from "../../controller.js";
-export default new class ProductController extends Controller {
+const { ObjectId } = require("mongodb")
+const CompanyModel = require("../../../../models/company")
+const ProductModel = require("../../../../models/product")
+const Controller = require("../../controller")
+module.exports =  new class ProductController extends Controller {
     async products(req, res, next) {
         try {
             const products = await ProductModel.aggregate([{

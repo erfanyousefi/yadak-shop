@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 const {Types, Schema, model} = mongoose;
 const OrderSchema = new Schema({
     username : {type : String, required : true},
@@ -17,4 +17,4 @@ const OrderSchema = new Schema({
     zipCode : {type : String, required : true},
     phone : {type : String, required : true}
 }, {timestamps : true})
-export default model("order", OrderSchema)
+module.exports = model("order", OrderSchema)

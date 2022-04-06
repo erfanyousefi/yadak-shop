@@ -1,10 +1,10 @@
-import moment from "moment-jalaali";
-import mongoose from "mongoose";
-import Controller from "../../controller.js";
-import productModel from "./../../../../models/product.js"
-import orderModel from "./../../../../models/order.js"
+const moment = require("moment-jalaali")
+const mongoose = require("mongoose")
+const Controller = require("../../controller")
+const productModel = require("./../../../../models/product")
+const orderModel = require("./../../../../models/order")
 const {isValidObjectId} = mongoose
-export default new class OrderController extends Controller{
+module.exports = new class OrderController extends Controller{
     async saveOrder(req, res, next){
         try {
             const {username, basket} = req.user;

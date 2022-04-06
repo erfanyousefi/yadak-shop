@@ -1,5 +1,5 @@
-import blogModel from "../../../../models/blog.js"
-import Controller from "./../../controller.js"
+const blogModel = require("../../../../models/blog")
+const Controller = require("./../../controller")
 let message = null, messages = {}
 class BlogController extends Controller{
     insertBlogForm(req, res, next){
@@ -81,4 +81,4 @@ class BlogController extends Controller{
     }
 }
 
-export default new BlogController();
+module.exports =  new BlogController();

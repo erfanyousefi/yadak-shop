@@ -1,6 +1,6 @@
-import express from "express";
-import {Router} from "express";
-import authController from "../../http/controllers/admin/auth/auth.controller.js";
+const express = require("express")
+const {Router} = require("express")
+const authController = require("../../http/controllers/admin/auth/auth.controller")
 const router = Router();
 router.use((req , res, next) => {
     res.locals.layout = "layouts/auth/authMaster";
@@ -13,4 +13,4 @@ router.get("/register", authController.loginForm)
 //     return res.status(404).render("./pages/admin/errors/404")
 
 // })
-export default router;
+module.exports = router;

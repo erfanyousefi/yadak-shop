@@ -1,6 +1,6 @@
-import Controller from "../../controller";
+const Controller = require("../../controller")
 
-export default new class TransactionController extends Controller{
+module.exports = new class TransactionController extends Controller{
     async insertTransaction(req, res, next){
 
     }

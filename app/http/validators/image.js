@@ -1,5 +1,5 @@
-import path from "path";
-import {body} from "express-validator"
+const path = require("path")
+const {body} = require("express-validator")
 const uploadImageValidator = () => {
     return [
         body("image").custom((value, {req}) => {
@@ -17,6 +17,6 @@ const uploadImageValidator = () => {
     ]
 }
 
-export {
+module.exports = {
     uploadImageValidator
 }

@@ -1,7 +1,7 @@
-import ProductModel from "../../../../models/product.js";
-import Controller from "../../controller.js";
+const ProductModel = require("../../../../models/product")
+const Controller = require("../../controller")
 
-export default new class ProductService extends Controller{
+module.exports = new class ProductService extends Controller{
     async insertProduct(doc){
         const product = await ProductModel.create(doc).then(product => product);
         if(product) return product;

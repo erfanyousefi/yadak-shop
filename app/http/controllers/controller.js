@@ -1,6 +1,6 @@
-import autoBind from "auto-bind";
-import jwt from "jsonwebtoken"
-export default class Controller{
+const autoBind = require("auto-bind")
+const jwt = require("jsonwebtoken")
+module.exports = class Controller{
     constructor(){
         autoBind(this);
     }

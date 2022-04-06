@@ -1,6 +1,6 @@
-import Controller from "../../controller.js";
+const Controller = require("../../controller");
 
-export default new class AuthController extends Controller{
+module.exports = new class AuthController extends Controller{
     async loginForm(req, res, next){
         try{
             return res.status(200).render("./pages/admin/auth/login")

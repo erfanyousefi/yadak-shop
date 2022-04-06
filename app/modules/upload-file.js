@@ -1,7 +1,7 @@
-import multer from "multer";
-import moment from "moment-jalaali"
-import fs from "fs"
-import path from "path"
+const multer = require("multer")
+const moment = require("moment-jalaali")
+const fs = require("fs")
+const path = require("path")
 const createFolderWithDate = (folder) => {
     const year = moment().jYear();
     const month = moment().jMonth();
@@ -25,6 +25,6 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage});
-export {
+module.exports = {
     upload
 }

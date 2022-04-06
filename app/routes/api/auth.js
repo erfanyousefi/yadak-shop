@@ -1,8 +1,8 @@
-import { Router } from "express";
-import AuthController from "../../http/controllers/api/auth/auth.controller.js";
-import apiErrorHandler from "../../http/middlewares/apiErrorHandler.js";
-import { register } from "../../http/validators/auth.js";
+const { Router } = require("express");
+const AuthController = require("../../http/controllers/api/auth/auth.controller");
+const apiErrorHandler = require("../../http/middlewares/apiErrorHandler");
+const { register } = require("../../http/validators/auth");
 const router = Router();
 router.post("/register", register(), apiErrorHandler, AuthController.register)
 router.post("/login", AuthController.login)
-export default router;
+module.exports =  router;

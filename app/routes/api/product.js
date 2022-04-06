@@ -1,9 +1,9 @@
-import { Router } from "express";
-import productControllers from "../../http/controllers/api/product/product.controllers.js";
-import { loginWithToken } from "../../http/middlewares/checkAuth.js";
+const { Router } = require("express");
+const productControllers = require("../../http/controllers/api/product/product.controllers");
+const { loginWithToken } = require("../../http/middlewares/checkAuth");
 const router = Router();
-router.get("/",loginWithToken, productControllers.products);
+router.get("/", productControllers.products);
 router.get("/company/:companyID", productControllers.productOfCompany);
 router.get("/:id", productControllers.findOneProduct);
 router.get("/:slug", productControllers.findProductWithSlug);
-export default router;
+module.exports = router;

@@ -1,6 +1,6 @@
-import BlogModel from "../../../../models/blog.js";
-import Controller from "../../controller.js";
-export default new class BlogController extends Controller{
+const BlogModel = require("../../../../models/blog")
+const Controller = require("../../controller")
+module.exports = new class BlogController extends Controller{
     async blogs(req, res, next) {
         try {
             const blogs = await BlogModel.find({});

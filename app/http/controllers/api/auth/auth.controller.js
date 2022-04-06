@@ -1,7 +1,7 @@
-import UserModel from "../../../../models/user.js";
-import Controller from "../../controller.js";
-import bcrypt from "bcrypt"
-export default new class AuthController extends Controller {
+const UserModel = require("../../../../models/user")
+const Controller = require("../../controller")
+const bcrypt = require("bcrypt")
+module.exports = new class AuthController extends Controller {
     async register(req, res, next){
         try {
             const {username, password, name} = req.body;

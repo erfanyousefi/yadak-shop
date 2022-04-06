@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 const {model, Schema, Types} = mongoose;
 const blogSchema = new Schema({
     title : {type : String, required : true},
@@ -10,4 +10,4 @@ const blogSchema = new Schema({
 }, {timestamps : true})
 
 const blogModel = model("blog", blogSchema);
-export default blogModel
+module.exports = blogModel

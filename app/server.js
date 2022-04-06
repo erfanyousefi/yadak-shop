@@ -1,18 +1,19 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import http from "http"
-import expressEjsLayouts from "express-ejs-layouts"
-import path from "path";
-import {fileURLToPath} from "url";
-import AllRoutes from "./routes/routes.js"
-import resolvePath from "./http/middlewares/resolvePath.js";
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-import adminRoutes from "./routes/admin/index.js"
-import cors from "cors"
+const express = require("express")
+const mongoose = require("mongoose")
+const dotenv = require("dotenv")
+const http = require("http")
+const expressEjsLayouts = require("express-ejs-layouts")
+const path = require("path")
+const AllRoutes = require("./routes/routes")
+// const {fileURLToPath} = require("url")
+// const resolvePath = require("./http/middlewares/resolvePath.js")
+// const __dirname = path.dirname(fileURLToPath(require.meta.url))
+// const adminRoutes = require("./routes/admin/index.js")
+// const { constants } = require("crypto")
+const cors = require ("cors")
 dotenv.config();
 const app = express();
-export default class Application{
+module.exports = class Application{
     constructor(){
         this.applicationConfig();
         this.createServer();

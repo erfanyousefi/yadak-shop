@@ -1,6 +1,6 @@
-import Controller from "../../controller.js";
+const Controller = require("../../controller");
 
-export default new class AuthService extends Controller{
+module.exports = new class AuthService extends Controller{
     async register(req, res, next){
 
     }

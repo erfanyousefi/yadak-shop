@@ -1,9 +1,9 @@
-import {Router} from "express";
-import productController from "../../http/controllers/admin/product/product.controller.js";
-import errorHandler from "../../http/middlewares/apiErrorHandler.js";
-import {insertPriceValidator, insertProductValidator} from "../../http/validators/product.js";
-import {uploadImageValidator} from "../../http/validators/image.js";
-import { upload } from "../../modules/upload-file.js";
+const {Router} =  require("express")
+const productController =  require("../../http/controllers/admin/product/product.controller")
+const errorHandler =  require("../../http/middlewares/apiErrorHandler")
+const {insertPriceValidator, insertProductValidator} =  require("../../http/validators/product")
+const {uploadImageValidator} =  require("../../http/validators/image")
+const { upload } =  require("../../modules/upload-file")
 const router = Router();
 router.get("/", productController.productUiDesign);
 router.get("/add", productController.addProductForm);
@@ -16,4 +16,4 @@ router.post("/update/:id" ,productController.updateProduct);
 router.post("/insert-price", insertPriceValidator(), errorHandler ,productController.insertPrice);
 router.get("/upload-image/:id" ,productController.uploadImageProductForm);
 router.post("/upload-image/:id",upload.single("image"), uploadImageValidator() ,productController.uploadImageProduct);
-export default router;
+module.exports = router;

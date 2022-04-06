@@ -1,6 +1,6 @@
-import Controller from "../../controller.js";
-import CompanyModel from "../../../../models/company.js";
-export default new class CompanyService extends Controller{
+const Controller = require("../../controller")
+const CompanyModel = require("../../../../models/company")
+module.exports = new class CompanyService extends Controller{
     async findCompanies(filter = {}){
         return (await CompanyModel.find(filter))
     }

@@ -1,7 +1,7 @@
-import UserModel from "../../../models/user.js";
-import productModel from "../../../models/product.js";
-import Controller from "./../controller.js";
-export default new class HomeController extends Controller{
+const UserModel = require("../../../models/user")
+const productModel = require("../../../models/product")
+const Controller = require("./../controller")
+module.exports = new class HomeController extends Controller{
     async addToCard(req, res, next){
         const user = req.user;
         const {product, company} = req.body;

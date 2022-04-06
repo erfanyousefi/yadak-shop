@@ -1,2 +1,2 @@
-import Application from "./app/server.js";
+const Application = require("./app/server");
 new Application();

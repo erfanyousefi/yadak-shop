@@ -1,7 +1,7 @@
-import {body, query, param} from "express-validator";
-import mongoose  from "mongoose";
+const {body, query, param} = require("express-validator")
+const mongoose  = require("mongoose");
 const {isValidObjectId} = mongoose
-export function insertProductValidator () {
+function insertProductValidator () {
     return [
         body("title").notEmpty().withMessage("نام محصول نمیتواند خالی"),
         body("text").notEmpty().withMessage("توضیحات محصول نمیتواند خالی باشد"),
@@ -10,7 +10,7 @@ export function insertProductValidator () {
     ]
 }
 
-export function insertPriceValidator () {
+function insertPriceValidator () {
     return [
         body("price").notEmpty().withMessage("قیمت را وارد کنید"),
         body("company").notEmpty().custom(value => {
@@ -21,6 +21,10 @@ export function insertPriceValidator () {
             }
         })
     ]
+}
+module.exports = {
+    insertPriceValidator,
+    insertProductValidator
 }
 // body("").notEmpty().withMessage(""),
 // body("").notEmpty().withMessage(""),

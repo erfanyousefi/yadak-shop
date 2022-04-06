@@ -1,5 +1,5 @@
-import { body } from "express-validator";
-import path from "path"
+const { body } = require("express-validator")
+const path = require("path")
 const insertBlog = () => [
     body("title").notEmpty().withMessage("عنوان مقاله نمیتواند خالی باشد"),
     body("text").notEmpty().withMessage("توضیحات مقاله نمیتواند خالی باشد"),
@@ -29,4 +29,4 @@ const insertBlog = () => [
     
 ]
 
-export {insertBlog};
+module.exports = {insertBlog};
