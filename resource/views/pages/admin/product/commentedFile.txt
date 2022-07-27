@@ -1,0 +1,40 @@
+<!-- <script>
+    const insertProductBtn = document.querySelector("#insertProductBtn");
+    insertProductBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const input = document.getElementById('fileinput');
+        $(".form").serialize()
+        const formData = $(".form").serializeArray()
+        const myForm = new FormData();
+        const body = {}
+        formData.map(field => {
+            body[field.name] = field.value
+            console.log(field.name, field.value, field.files, field.file)
+        })
+        body['image'] = input.files[0]
+        console.log(input.files[0]);
+        const result = await (await fetch("http://localhost:5000/admin/product/insert", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        })).json()
+        if (result.status == 400) {
+            document.querySelector(".modal-body").innerHTML = Object.keys(result?.messages)?.map(key =>
+                (`<span>${result.messages[key]}</span><br/>`)).join("")
+            $('#iconModal').modal("show");
+        } else {
+            document.querySelector(".modal-body").innerHTML = "ثبت محصول با موفقیت انجام شد"
+            $('#iconModal').modal("show");
+            const inputs = (document.querySelectorAll("input")).forEach(input => {
+                input.value = ""
+            });
+            (document.querySelectorAll("textarea")).forEach(input => {
+                input.innerHTML = ""
+                input.value = "";
+
+            });
+        }
+    });
+</script> -->

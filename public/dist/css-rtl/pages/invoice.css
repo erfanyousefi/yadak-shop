@@ -1,0 +1,9 @@
+#invoice-template
+{
+    padding: 4rem;
+}
+
+#invoice-template ul li
+{
+    line-height: 1.8rem;
+}

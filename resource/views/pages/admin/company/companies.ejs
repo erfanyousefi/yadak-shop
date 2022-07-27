@@ -1,0 +1,122 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-detached">
+            <div class="content-body">
+                <section class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-head">
+                                <div class="card-header">
+                                    <h4 class="card-title" id="basic-layout-form">شرکت های تولید کننده ی قطعات</h4>
+                                    <a class="heading-elements-toggle">
+                                        <i class="la la-ellipsis-v font-medium-3"></i>
+                                    </a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li>
+                                                <a href="/admin/company/add">
+                                                    <i class="ft-plus-circle"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-action="collapse">
+                                                    <i class="ft-minus"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-action="reload">
+                                                    <i class="ft-rotate-cw"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-action="expand">
+                                                    <i class="ft-maximize"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-action="close">
+                                                    <i class="ft-x"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-content col-12">
+                                <div class="card-body">
+                                    <!-- Task List table -->
+                                    <div class="table-responsive">
+                                        <table id="users-contacts"
+                                            class="table table-white-space table-bordered table-striped row-grouping display no-wrap icheck table-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>نام فارسی</th>
+                                                    <th>نام لاتین</th>
+                                                    <th>تولید کننده محصولات : </th>
+                                                    <th>لوگوی کمپانی</th>
+                                                    <th>عملیات</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%companies?.forEach((company, index) => {%>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <%-`<b>${index+1}</b>`%>
+                                                    </td>
+                                                    <td>
+                                                        <div class="media">
+                                                            <div class="media-body media-middle">
+                                                                <span
+                                                                    class="media-heading text-bold-700"><%=company.fa_name%></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <span><%=(company.en_name)%></span>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <span><%=(company.type=="oil"? "روغن" : company.type=="filter"? "فیلتر" : "یدکی")%></span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <%if(company.logo){%>
+                                                        <img src="<%=company.logo%>" width="70" height="70"/>
+                                                        <%}else{%>فاقد لوگو<%}%>
+                                                    </td>
+                                                    <td>
+                                                        <span class="dropdown">
+                                                            <button id="btnSearchDrop12" type="button"
+                                                                class="btn btn-sm btn-icon btn-pure font-medium-2"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                <i class="ft-more-vertical"></i>
+                                                            </button>
+                                                            <span aria-labelledby="btnSearchDrop12"
+                                                                class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                <a href="#" class="dropdown-item">
+                                                                    <i class="ft-trash-2"></i> ویرایش</a>
+                                                                <a href="#" class="dropdown-item">
+                                                                    <i class="ft-edit-2"></i> حذف</a>
+                                                                    <a href="/admin/company/upload-logo/<%=company._id%>" class="dropdown-item">
+                                                                        <i class="ft-trash-2"></i> افزودن لوگوی شرکت</a>
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <%})%>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

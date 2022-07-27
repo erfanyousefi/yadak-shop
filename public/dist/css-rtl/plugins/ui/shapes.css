@@ -1,0 +1,511 @@
+/*
+Square Shape
+*/
+.square-shape
+{
+    width: 100px;
+    height: 100px;
+
+    background: #6967ce;
+}
+
+/*
+Rectangle Shape
+*/
+.rectangle-shape
+{
+    width: 200px;
+    height: 100px;
+
+    background: #6967ce;
+}
+
+/*
+Circle Shape
+*/
+.circle-shape
+{
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50px; 
+    background: #6967ce;
+}
+
+/*
+Oval Shape
+*/
+.oval-shape
+{
+    width: 200px;
+    height: 100px;
+
+    border-radius: 100px / 50px; 
+    background: #6967ce;
+}
+
+/*
+Triangle Up
+*/
+.triangle-up-shape
+{
+    width: 100px;
+    height: 100px;
+
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #6967ce; 
+    border-left: 50px solid transparent;
+}
+
+/*
+Triangle Down
+*/
+.triangle-down-shape
+{
+    width: 0;
+    height: 0;
+
+    border-top: 100px solid #6967ce; 
+    border-right: 50px solid transparent;
+    border-left: 50px solid transparent;
+}
+
+/*
+Triangle Left
+*/
+.triangle-left-shape
+{
+    width: 0;
+    height: 0;
+
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent; 
+    border-left: 100px solid #6967ce;
+}
+
+/*
+Triangle Right
+*/
+.triangle-right-shape
+{
+    width: 0;
+    height: 0;
+
+    border-top: 50px solid transparent;
+    border-right: 100px solid #6967ce;
+    border-bottom: 50px solid transparent;
+}
+
+/*
+Triangle Top Left
+*/
+.triangle-topleft-shape
+{
+    width: 0;
+    height: 0;
+
+    border-top: 100px solid #6967ce;
+    border-left: 100px solid transparent;
+}
+
+/*
+Triangle Top Right
+*/
+.triangle-topright-shape
+{
+    width: 0;
+    height: 0;
+
+    border-top: 100px solid #6967ce;
+    border-right: 100px solid transparent;
+}
+
+/*
+Triangle Bottom Left
+*/
+.triangle-bottomleft-shape
+{
+    width: 0;
+    height: 0;
+
+    border-bottom: 100px solid #6967ce;
+    border-left: 100px solid transparent;
+}
+
+/*
+Triangle Bottom Right
+*/
+.triangle-bottomright-shape
+{
+    width: 0;
+    height: 0;
+
+    border-right: 100px solid transparent; 
+    border-bottom: 100px solid #6967ce;
+}
+
+/*
+Star Shape
+*/
+.star-shape
+{
+    position: relative;
+
+    display: block;
+
+    width: 0;
+    height: 0;
+    margin: 50px 0;
+
+    -webkit-transform: rotate(-35deg);
+       -moz-transform: rotate(-35deg);
+        -ms-transform: rotate(-35deg);
+         -o-transform: rotate(-35deg);
+            transform: rotate(-35deg); 
+
+    color: #6967ce;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid #6967ce;
+    border-left: 100px solid transparent;
+}
+.star-shape:before
+{
+    position: absolute;
+    top: -45px;
+    right: -65px;
+
+    display: block;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+    -webkit-transform: rotate(35deg);
+       -moz-transform: rotate(35deg);
+        -ms-transform: rotate(35deg);
+         -o-transform: rotate(35deg);
+            transform: rotate(35deg); 
+
+    border-right: 30px solid transparent;
+    border-bottom: 80px solid #6967ce;
+    border-left: 30px solid transparent;
+}
+.star-shape:after
+{
+    position: absolute;
+    top: 3px;
+    right: -105px;
+
+    display: block;
+
+    width: 0;
+    height: 0;
+
+    content: ''; 
+    -webkit-transform: rotate(70deg);
+       -moz-transform: rotate(70deg);
+        -ms-transform: rotate(70deg);
+         -o-transform: rotate(70deg);
+            transform: rotate(70deg);
+
+    color: #6967ce;
+    border-right: 100px solid transparent;
+    border-bottom: 70px solid #6967ce;
+    border-left: 100px solid transparent;
+}
+
+/*
+Pentagon
+*/
+.pentagon-shape
+{
+    position: relative;
+
+    width: 54px;
+
+    border-width: 50px 18px 0;
+    border-style: solid;
+    border-color: #6967ce transparent;
+}
+.pentagon-shape:before
+{
+    position: absolute;
+    top: -85px;
+    right: -18px;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    border-width: 0 45px 35px;
+    border-style: solid;
+    border-color: transparent transparent #6967ce;
+}
+
+/*
+Hexagon
+*/
+.hexagon-shape
+{
+    position: relative; 
+
+    width: 100px;
+    height: 55px;
+
+    background: #6967ce;
+}
+.hexagon-shape:before
+{
+    position: absolute;
+    top: -25px;
+    right: 0;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    border-right: 50px solid transparent;
+    border-bottom: 25px solid #6967ce; 
+    border-left: 50px solid transparent;
+}
+.hexagon-shape:after
+{
+    position: absolute;
+    right: 0;
+    bottom: -25px;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    border-top: 25px solid #6967ce; 
+    border-right: 50px solid transparent;
+    border-left: 50px solid transparent;
+}
+
+/*
+Octagon
+*/
+.octagon-shape
+{
+    position: relative; 
+
+    width: 100px;
+    height: 100px;
+
+    background: #6967ce;
+}
+.octagon-shape:before
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 42px;
+    height: 0; 
+
+    content: '';
+
+    border-right: 29px solid #eee;
+    border-bottom: 29px solid #6967ce;
+    border-left: 29px solid #eee;
+}
+.octagon-shape:after
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 42px;
+    height: 0; 
+
+    content: '';
+
+    border-top: 29px solid #6967ce;
+    border-right: 29px solid #eee;
+    border-left: 29px solid #eee;
+}
+
+/*
+Heart Shape
+*/
+.heart-shape
+{
+    position: relative;
+
+    width: 100px;
+    height: 90px;
+}
+.heart-shape:before
+{
+    position: absolute;
+    top: 0;
+    right: 50px;
+
+    width: 50px;
+    height: 80px;
+
+    content: '';
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+       -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+         -o-transform-origin: 100% 100%;
+            transform-origin: 100% 100%; 
+
+    border-radius: 50px 50px 0 0;
+    background: #6967ce;
+}
+.heart-shape:after
+{
+    position: absolute;
+    top: 0;
+    right: 50px;
+    right: 0;
+
+    width: 50px;
+    height: 80px;
+
+    content: '';
+    -webkit-transform: rotate(45deg);
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 100% 100%;
+    -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 100% 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 100% 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 100% 100%;
+         -o-transform-origin: 0 100%;
+            transform-origin: 100% 100%;
+            transform-origin: 0 100%; 
+
+    border-radius: 50px 50px 0 0;
+    background: #6967ce;
+}
+
+/*
+Diamond
+*/
+.cut-diamond-shape
+{
+    position: relative;
+
+    width: 50px;
+    height: 0;
+    margin: 20px 0 50px 0; 
+
+    border-width: 0 25px 25px 25px;
+    border-style: solid;
+    border-color: transparent transparent #6967ce transparent;
+}
+.cut-diamond-shape:after
+{
+    position: absolute;
+    top: 25px;
+    right: -25px;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    border-width: 70px 50px 0 50px; 
+    border-style: solid;
+    border-color: #6967ce transparent transparent transparent;
+}
+
+/*
+Diamond Square
+*/
+.diamond-shape
+{
+    position: relative;
+    top: -50px; 
+
+    width: 0;
+    height: 0;
+
+    border: 50px solid transparent;
+    border-bottom-color: #6967ce;
+}
+.diamond-shape:after
+{
+    position: absolute;
+    top: 50px;
+    right: -50px;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    border: 50px solid transparent;
+    border-top-color: #6967ce;
+}
+
+/*
+Egg Shape
+*/
+.egg-shape
+{
+    display: block;
+
+    width: 126px;
+    height: 180px;
+
+    border-radius: 50%  50%  50%  50%  / 60%   60%   40%  40%; 
+    background-color: #6967ce;
+}
+
+.app-shape
+{
+    position: relative;
+    z-index: 10; 
+
+    margin: auto;
+
+    vertical-align: middle;
+
+    color: #fff;
+}
+.app-shape span
+{
+    position: absolute;
+    z-index: 11; 
+    top: 50%;
+    right: 0;
+    left: 0;
+
+    margin-top: -10px;
+
+    text-align: center;
+}
+
+.heart-shape span
+{
+    margin-top: -20px;
+}
+
+@media (min-width: 768px)
+{
+    .jqueryui-ele-container .app-shape
+    {
+        display: inline-block;
+    }
+}
