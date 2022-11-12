@@ -36,7 +36,6 @@ const router = Router();
  *              201:
  *                  description: created
  */
-router.post("/add-to-basket", homeController.addToCard)
 /**
  * @swagger
  *  /basket/remove-from-basket:
@@ -53,6 +52,17 @@ router.post("/add-to-basket", homeController.addToCard)
  *              201:
  *                  description: created
  */
+/**
+ * @swagger
+ *  /basket:
+ *      get:
+ *          tags: [BasketOfProducts]
+ *          summary: get user basket
+ *          responses:
+ *              200:
+ *                  description: success
+ */
+router.post("/add-to-basket", homeController.addToCard)
 router.post("/remove-from-basket", homeController.removeFromCard)
 router.get("/", homeController.getBasket)
 module.exports = router;

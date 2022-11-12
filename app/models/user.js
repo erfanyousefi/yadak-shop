@@ -1,5 +1,9 @@
 const mongoose = require("mongoose")
 const {Schema, model, Types} = mongoose;
+const BasketSchema = new Schema({
+    product: {type : mongoose.Types.ObjectId, ref: "products"},
+    count : {type: Number}
+})
 const UserSchema = new Schema({
     name : {type : String, default : ""},
     IdentityCard : {type : String, default : ""},
@@ -10,8 +14,9 @@ const UserSchema = new Schema({
     otp : {type : Object, default : {code: 00000, expiresIn : (new Date().getTime() - 10000)}},
     addresses : {type : [Object], default : []},
     profile_img : {type : String, default : "default.png"},
-    role : {type : String, default : "user"},
-    basket : {type : [{product : String, count : Number}], default : []},
+    role : {type : String, default : "USER"},
+    basket : {type : [BasketSchema], default : []},
+    token: {type: String, default: ""},
 }, {
     timestamps : true,
     versionKey : false

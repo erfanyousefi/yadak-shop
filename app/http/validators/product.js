@@ -6,7 +6,7 @@ function insertProductValidator () {
         body("name").notEmpty().withMessage("نام محصول نمیتواند خالی"),
         body("text").notEmpty().withMessage("توضیحات محصول نمیتواند خالی باشد"),
         body("count").notEmpty().withMessage("تعداد محصول در انبار را مشخص کنید"),
-        body("serialnumber").notEmpty().withMessage("شماره سریال محصول را وارد کنید"),
+        body("serialNumber").notEmpty().withMessage("شماره سریال محصول را وارد کنید"),
         body("price").notEmpty().withMessage("قیمت محصول را وارد کنید"),
         body("image").custom((value, {req}) => {
             if(!req.file) throw "لطفا یک تصویر را انتخاب نمایید"

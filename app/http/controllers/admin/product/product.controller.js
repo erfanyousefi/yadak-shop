@@ -5,131 +5,59 @@ const companyService = require("../company/company.service")
 const CompanyModel = require("../../../../models/company")
 const ProductModel = require("../../../../models/product")
 const { ObjectId } = require("mongodb")
-const { db } = require("./../../../../modules/connectToDB")
+const { connectToCluster } = require("./../../../../modules/connectToDB")
 let messages = {}, message = "";
 module.exports = new class ProductController extends Controller{
-    async productUiDesign(req, res, next){
+    async productsList(req, res, next){
         try{
             const filters = {};
             const products = await ProductService.findProducts(filters)
-            return res.status(200).render("./pages/admin/product/products", {
-                products,
-                message,
-                messages
+            return res.status(200).json({
+                statusCode: 200,
+                data: {
+                    products,
+                }
             })
         }catch(error){
-            next(error)
-        }
-    }
-    async addProductForm(req, res, next){
-        try{
-            // const {category} = req.query;
-            // switch (category) {
-            //     case "stock":
-            //         res.status(200).render("./pages/admin/product/add-product");
-            //         break;
-            //     case "oil":
-            //         res.status(200).render("./pages/admin/product/add-oil-product", {
-            //             messages,
-            //             message
-            //         })
-            //         break;
-            //     case "filter":
-            //         res.status(200).render("./pages/admin/product/add-filter-product");
-            //         break;
-            //     default:
-            //         res.status(200).render("./pages/admin/product/add-product")
-            //         break;
-            // }
-            res.status(200).render("./pages/admin/product/add-oil-product", {
-                messages,
-                message
-            })
-            messages = {};
-            message = "";
-            return
-            
-        }catch(error){
-            next(error)
-        }
-    }
-    async addOilProductForm(req, res, next){
-        try{
-            console.log(messages);
-            return res.status(200).render("./pages/admin/product/add-oil-product", {
-                messages,
-                message
-            })
-        }catch(error){
-            next(error)
-        }
-    }
-    async addPriceForm(req, res, next){
-        try {
-            const {id} = req.params
-            const product = await ProductModel.findOne({_id : id})
-            if(!product) return res.redirect("/admin/product")
-            console.log(product.category)
-            const companies = await companyService.findCompanies({type : product.category})
-            console.log(id);
-            return res.status(200).render("pages/admin/product/add-price", {
-                companies,
-                product_id : id,
-                req
-            }) 
-        } catch (error) {
             next(error)
         }
     }
     async insertProduct(req, res, next){
         try {
-            // const sizes = {
-            //     length : req.body.length || "0",
-            //     width : req.body?.width || "0",
-            //     height : req.body?.height || "0"
-            // }
-            if(Object.keys(req?.body?.errors || {}).length > 0){
-                messages = req.body.errors
-                console.log(messages);
-            }else{
-                const {
-                    name,
-                    text,
-                    count,
-                    serialnumber,
-                    usefor,
-                    off,
-                    madein,
-                    volume,
-                    type,
-                    price,
-                    brand,
-                } = req.body;
-                const slug = name.replace(/[\s\@\$\#\!\^\&\*\(\)\=\+\/]/gim, "-");
-                await ProductService.insertProduct({
-                    name,
-                    slug,
-                    text,
-                    count,
-                    serialNumber : serialnumber,
-                    off,
-                    useFor : usefor,
-                    brand,
-                    price,
-                    volume, //for oil's
-                    type, //for oil's
-                    madeIn : madein, //for oil's
-                    image : this.getFileName(req.file)
-    
-                });
-                message = "ثبت محصول با موفقیت انجام شد"
-                // return res.status(201).json({
-                //     status : 201,
-                //     success : true,
-                //     message : "ثبت محصول با موفقیت انجام شد"
-                // })
-            }
-            return  res.redirect(req.headers.referer);
+            const {
+                name,
+                text,
+                count,
+                serialNumber,
+                useFor,
+                off,
+                madeIn,
+                volume,
+                type,
+                price,
+                productType,
+                brand,
+            } = req.body;
+            await ProductService.insertProduct({
+                name,
+                productType,
+                text,
+                count,
+                serialNumber,
+                off,
+                useFor,
+                brand,
+                price,
+                volume, //for oil's
+                type, //for oil's
+                madeIn, //for oil's
+                image : this.getFileName(req.file)
+
+            });
+            return  res.status(201).json({
+                statusCode: 201,
+                message: "ثبت محصول با موفقیت انجام شد"
+            });
         } catch (error) {
             next(error)
         }
@@ -137,38 +65,8 @@ module.exports = new class ProductController extends Controller{
     async updateProduct(req, res, next){
         try {
             const {id} = req.params;
-            const product = await ProductModel.findById(id)
-            const category = req.body.category;
-            const data =  {
-                title : req.body.title,
-                text : req.body.text,
-                count : req.body.count,
-                serialNumber : req.body.serialnumber,
-                off : req.body.off,
-                weight : req.body.weight,
-                series : req.body.series,
-            };
-            if(data.title) data.slug = data.title.replace(/[\s\@\$\#\!\^\&\*\(\)\=\+\/]/gim, "-");
-            switch (category) {
-                case "oil":
-                    data.volume = req.body.volume;
-                    data.cars = req.body.cars;
-                    break;
-                case "filter":
-                    data.cars = req.body.cars;
-                    break;
-                case "stock" :
-                    const sizes = {
-                        length : req.body.length || product.sizes.length,
-                        width : req.body?.width || product.sizes.width,
-                        height : req.body?.height || product.sizes.height
-                    }
-                    data.sizes = sizes
-                    break;
-                default:
-                    break;
-            }
-            Object.keys(data).forEach(key => ([null, undefined, "", " ", "0"].includes(data[key])? delete data[key] : data[key]));
+            const data = Object.assign({}, req.body);
+            Object.keys(data).forEach(key => ([null, undefined, "", " "].includes(data[key])? delete data[key] : data[key]));
             await ProductService.updateProduct(id, data);
             return res.status(201).json({
                 status : 201,
@@ -222,15 +120,18 @@ module.exports = new class ProductController extends Controller{
             console.log(req.body)
             const companyDocument = await ProductModel.findOne({"prices.company" : ObjectId(company), _id : ObjectId(product_id)});
             const product = await ProductModel.findById(product_id);
+            mongoClient = await connectToCluster();
+            const db = mongoClient.db(process.env.DB_NAME);
+            const collection = db.collection('products');
             if(product){
                 if(companyDocument){
-                    const result = await db.collection("products").updateOne({"prices.company" : ObjectId(company), _id : ObjectId(product_id)}, {
+                    const result = await collection.updateOne({"prices.company" : ObjectId(company), _id : ObjectId(product_id)}, {
                         $set : { "prices.$.price" : price}
                     })
                     console.log(JSON.stringify(result, null, 4));
                     
                 }else{
-                    const result = await db.collection("products").updateOne({_id : ObjectId(product_id)}, {
+                    const result = await collection.updateOne({_id : ObjectId(product_id)}, {
                         $push : { "prices" : {company : ObjectId(company), price}}
                     })
                     console.log(JSON.stringify(result, null, 4));
@@ -242,16 +143,6 @@ module.exports = new class ProductController extends Controller{
                 })
             }
             throw {status : 404, message : "محصولی یافت نشد"}
-        }catch(error){
-            next(error)
-        }
-    }
-    async uploadImageProductForm(req, res, next){
-        try{
-            const {id} = req.params
-            return res.status(200).render("./pages/admin/product/upload-img", {
-                product_id : id
-            })
         }catch(error){
             next(error)
         }
@@ -300,24 +191,13 @@ module.exports = new class ProductController extends Controller{
             aggregate.push({
                 $project : {prices : 0}
             })
-            const product = await db.collection("products").aggregate(aggregate).toArray();
+            const product = await collection.aggregate(aggregate).toArray();
             console.log(JSON.stringify(product, null, 4));
             
             return res.status(200).json({
                 status : 200,
                 success : true,
                 ...product[0]
-            })
-        }catch(error){
-            next(error)
-        }
-    }
-    async updateProductForm(req, res, next){
-        try{
-            const {id} = req.params;
-            const product = await ProductModel.findById(id);
-            return res.status(200).render("./pages/admin/product/edit-product", {
-                product
             })
         }catch(error){
             next(error)

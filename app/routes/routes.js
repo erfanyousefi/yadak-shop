@@ -1,13 +1,9 @@
 const { Router } = require("express")
 const router = Router();
 const adminRoutes = require("./admin/index")
-const authRoutes = require("./admin/auth")
-const ApiRoutes = require("./api/index")
-router.use("/auth", authRoutes)
-router.use((req, res, next) => {
-    res.locals.layout = "layouts/master";
-    next()
-})
-router.use("/admin", adminRoutes)
+const ApiRoutes = require("./api/index");
+const { checkAdmin } = require("../http/middlewares/checkRole");
+const { loginWithToken } = require("../http/middlewares/checkAuth");
+router.use("/admin", loginWithToken, checkAdmin, adminRoutes)
 router.use("/", ApiRoutes)
 module.exports = router;

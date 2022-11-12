@@ -2,16 +2,11 @@ const express = require("express")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const http = require("http")
-const expressEjsLayouts = require("express-ejs-layouts")
 const path = require("path")
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const AllRoutes = require("./routes/routes")
-// const {fileURLToPath} = require("url")
-// const resolvePath = require("./http/middlewares/resolvePath.js")
-// const __dirname = path.dirname(fileURLToPath(require.meta.url))
-// const adminRoutes = require("./routes/admin/index.js")
-// const { constants } = require("crypto")
+
 const cors = require ("cors")
 dotenv.config();
 const app = express();
@@ -42,13 +37,19 @@ module.exports = class Application{
                       "بزرگترین مرجع فروش روغن موتور و فیلتر ",
                     contact: {
                       name: "Erfan Yousefi",
-                      url: "https://roghanicar.com",
+                      url: process.env.BACKEND,
                       email: "erfanyousefi.co@gmail.com",
                     },
                   },
                   servers: [
                     {
-                      url: "https://api.roghanicar.com",
+                      url: process.env.BACKEND
+                    },
+                    {
+                      url: "  https://inspiring-lichterman-jhgusysru.iran.liara.run",
+                    },
+                    {
+                      url: "  http://localhost:5300",
                     },
                   ],
                   components : {
@@ -68,14 +69,6 @@ module.exports = class Application{
               {explorer: true},
             )
         );
-        app.set("view engine", "ejs")
-        app.use(expressEjsLayouts);
-        app.set("views","resource/views");
-        app.set("layout extractScripts", true);
-        app.set("layout extractStyles", true);
-        // app.set('layout', './layouts/master');
-        
-        
     }
     databaseConnection(){
       const {DB_URL} = process.env;

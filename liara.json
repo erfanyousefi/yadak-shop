@@ -1,0 +1,8 @@
+{
+    "disks": [
+        {
+            "name": "roghanicar",
+            "mountTo": "public/upload"
+        }
+    ]
+}

@@ -1,15 +1,24 @@
-const kavenegar = require("kavenegar") 
-const smsClient = kavenegar.KavenegarApi({apikey : "7A356A38474F636B434C4B5078466C387546467138796356324A366A796F7A6334504F762F3879346F32303D"})
-function send_smd(mobile, message){
-    smsClient.Send({
-        message, 
-        receptor : mobile,
-        date : new Date().getTime()
-
-    }, (error) => {
-        console.log(error)
+const axios = require('axios')
+const sendSms = async (mobile , code) => {
+    const {status , data} = await axios.post('https://api.sms.ir/v1/send/verify' , {
+        "mobile": mobile,
+        "templateId": 777254,
+        parameters : [
+          {
+            name : 'Code',
+            value : `${code}`
+          }
+        ]
+      } , {
+        headers : {
+            ACCEPT : 'application/json',
+            'X-API-KEY' : process.env.SMS_SECRETE_KEY
+        }
     })
+    console.log({status , data});
+    if(status !== 200) throw {statusCode : status , message : data.message}  
 }
+
 module.exports = {
-    send_smd
+    sendSms
 }

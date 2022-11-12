@@ -2,16 +2,6 @@ const blogModel = require("../../../../models/blog")
 const Controller = require("./../../controller")
 let message = null, messages = {}
 class BlogController extends Controller{
-    insertBlogForm(req, res, next){
-        try{
-            res.status(200).render("./pages/admin/blog/add-blog", {
-                message, messages
-            })
-            messages = {}, message = null
-        }catch(error){
-            next(error)
-        }
-    }
     async insertBlog(req, res, next){
         try {
             const {title, text, suggest} = req.body;
@@ -20,13 +10,17 @@ class BlogController extends Controller{
             const fileField = req?.files || undefined
             if(fileField?.images?.length) images = fileField.images.map(file => file.destination.substr(8) + file.filename)
             if(fileField?.pdf?.length) pdf = fileField.pdf.map(file => file.destination.substr(8) + file.filename)[0]
-            const blog = await blogModel.create({ title, text, suggest, images, pdf  }).catch(error => {
+            const blog = await blogModel.create({ title, text, suggest, images, pdf  })
+            .catch(error => {
                 messages = {...messages, ...error}
                 this.removeFile(req.files.images)
                 this.removeFile(req.files.pdf)
             })
             if(blog) message = "ثبت مقاله با موفقیت انجام شد"
-            return res.redirect("/admin/blog/add")
+            return res.status(200).json({
+                statusCode: 200,
+                message
+            })
         } catch (error) {
             next(error);
         }
@@ -58,23 +52,12 @@ class BlogController extends Controller{
     async blogs(req, res, next){
         try{
             const blogs = await blogModel.find({}).sort({_id : -1});
-            return res.status(200).render("./pages/admin/blog/blogs",{
-                blogs
+            return res.status(200).json({
+                statusCode: 200,
+                data: {
+                    blogs
+                }
             })
-        }catch(error){
-            next(error);
-        }
-    }
-    async editBlogForm(req, res, next){
-        try{
-            const {id} = req.params;
-            const blog = await blogModel.findById(id);
-            res.status(200).render("./pages/admin/blog/edit-blog",{
-                blog,
-                messages, 
-                message
-            })
-            messages = {}, message = null
         }catch(error){
             next(error);
         }

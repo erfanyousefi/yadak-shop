@@ -1,7 +1,7 @@
 const UserModel = require("../../../../models/user")
 const Controller = require("../../controller")
 const bcrypt = require("bcrypt");
-const { send_smd } = require("../../../../modules/send_sms");
+const { sendSms } = require("../../../../modules/send_sms");
 module.exports = new class AuthController extends Controller {
     async register(req, res, next){
         try {
@@ -58,20 +58,18 @@ module.exports = new class AuthController extends Controller {
             if(!user){
                 await UserModel.create({
                     username,
-                    role : "user",
+                    role : "USER",
                     otp
                 })
             }else{
                 await UserModel.updateOne({username}, {$set : {otp}})
             }
-            const message = `کد ورود شما به حساب کاربری یدکی شاپ 
-            ${code}`;
-            send_smd(username, message)
+            await sendSms(username, code)
             return res.status(201).json({
                 status : 201,
                 success : true,
                 message : "کد اعتبار سنجی با موفقیت برای شما ارسال شد",
-                code
+                
             })
         } catch (error) {
             next(error)
@@ -87,6 +85,8 @@ module.exports = new class AuthController extends Controller {
             if(code != userCode) throw {status : 401, message : "کد ارسال شده صحیح نمیباشد"}
             if(userCodeExpires < (new Date().getTime())) throw {status : 401, message : "کد ارسال شده منقضی شده است"}
             const token = await this.jwtGenerator({username});
+            user.token = token
+            await user.save()
             req.user = user;
             let user_info = !!(user.name && user.IdentityCard)
             return res.status(200).json({
