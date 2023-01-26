@@ -74,7 +74,7 @@ module.exports = new class OrderController extends Controller {
         try{
             const {iN : invoiceNumber} = req.query;
             if(!invoiceNumber) throw{status: 400, message: "شماره فاکتور یافت نشد"}
-            const order = await orderModel.findOne({invoiceNumber, payment : false, status: "pending"});
+            const order = await orderModel.findOne({invoiceNumber, payment : false, status: "new"});
             if(!order) throw{status : 400, message : "سفارش در انتظار پرداخت یافت نشد"}
             await orderModel.updateOne({invoiceNumber} , {payment : true, status: "success"});
             await UserModel.updateOne({username : order.username} , {basket : []});
@@ -104,12 +104,40 @@ module.exports = new class OrderController extends Controller {
         try{
             const {username} = req.user
             const {status} = req.params;
-            if(!["success", "reject", "pending", "canceld"].includes(status)) throw {status : 200, message : "وضعیت مورد نظر وجود ندارد"}
+            if(!["new", "process", "delivered"].includes(status)) throw {status : 200, message : "وضعیت مورد نظر وجود ندارد"}
             const orders = await orderModel.find({status, username}).sort({_id : -1})
             return res.status(200).json({
                 status : 200,
                 success : true,
                 orders
+            })
+        }catch(error){
+            next(error)
+        }
+    }
+    async changeOrderStatus(req, res, next){
+        try{
+            const {id} = req.params;
+            const {status} = req.body;
+            if(!["new", "process", "delivered"].includes(status)) throw {status : 400, message : "وضعیت مورد نظر وجود ندارد"}
+            const order = await orderModel.findOne({_id: id})
+            if(!order) throw {status : 404, message : "سفارش مورد نظر وجود ندارد"}
+            if(order?.status == "delivered") {
+                throw {status: 400, message: "وضعیت تحویل داده شده غیر قابل تغییر میباشد"}
+            }
+            if(!(order?.status == "process" && status == "delivered")) {
+                throw {status: 400, message: "وضعیت در حال پردازش تنها به تحویل داده شده قابل تغییر میباشد"}
+            }
+            if(!(order?.status == "new" && status == "process")) {
+                throw {status: 400, message: "وضعیت جدید تنها به در حال پردازش  قابل تغییر میباشد"}
+            }
+            await orderModel.updateOne({_id: id}, {
+                $set: {status}
+            })
+            return res.status(200).json({
+                status : 200,
+                success : true,
+                message: "وضغیت سفارش با موفقیت تغییر پیدا کرد"
             })
         }catch(error){
             next(error)

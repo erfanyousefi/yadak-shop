@@ -1,12 +1,12 @@
 
-const {
-    Router
-} = require("express")
+const { Router } = require("express")
 const router = Router();
+const userRoutes = require("./user")
+const orderRoutes = require("./order")
 const productRoutes = require("./product")
-const companyRoutes = require("./company")
 const blogRoutes = require("./blog")
+router.use("/users", userRoutes)
+router.use("/order", orderRoutes)
 router.use("/product", productRoutes)
-// router.use("/company", companyRoutes)
 router.use("/blog", blogRoutes)
 module.exports = router;

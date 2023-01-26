@@ -49,7 +49,7 @@ module.exports = class Application{
                       url: "  https://inspiring-lichterman-jhgusysru.iran.liara.run",
                     },
                     {
-                      url: "  http://localhost:5300",
+                      url: "  http://localhost:3000",
                     },
                   ],
                   components : {
@@ -81,7 +81,7 @@ module.exports = class Application{
     }
     createServer(){
         const server = http.createServer(app);
-        server.listen(+process.env.PORT || 5000, () => {
+        server.listen(+process.env.PORT || 3000, () => {
             console.log("Server > Run on Port " + process.env.PORT);
         })
     }

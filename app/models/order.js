@@ -10,7 +10,7 @@ const OrderSchema = new Schema({
     tref : {type : String, default : ""},
     invoiceNumber : {type : String, required : true},
     invoiceDate : {type : String, required : true},
-    status : {type : String, default : "pending"}, //in-process, sending - reciving ,
+    status : {type : String, default : "new"}, //in-process, sending - reciving ,
     province : {type : String, required : true},
     city : {type : String, required : true},
     address : {type : String, required : true},

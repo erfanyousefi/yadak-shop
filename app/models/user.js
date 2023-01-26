@@ -6,6 +6,7 @@ const BasketSchema = new Schema({
 })
 const UserSchema = new Schema({
     name : {type : String, default : ""},
+    phone : {type : String, default : ""},
     IdentityCard : {type : String, default : ""},
     username : {type : String, required : true},
     password : {type : String},

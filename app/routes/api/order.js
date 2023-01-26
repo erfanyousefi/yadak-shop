@@ -84,10 +84,9 @@ router.get("/",loginWithToken, orderController.getOrdersWithStatus)
  *                  schema:
  *                      type: string  
  *                      enum: 
- *                          -   success
- *                          -   pending
- *                          -   canceled
- *                          -   reject
+ *                          -   new
+ *                          -   process
+ *                          -   delivered
  *                  required: true
  *          responses:
  *              200:
